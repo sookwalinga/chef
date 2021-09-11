@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:hexcolor/hexcolor.dart';
 import 'views/countdown-page.dart';
 
 void main() {
@@ -10,10 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Countdown app',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      title: 'Chef app',
+      theme: ThemeData(primarySwatch: Colors.deepOrange),
       home: CountdownPage(),
     );
   }
