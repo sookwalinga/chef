@@ -47,9 +47,9 @@ flutter_icons:
 # Splash screen
 flutter_native_splash:
   color: '#ffffff'
-  image:  'assets/chef_logo1.png'
+  image:  'assets/chef_splash.png'
   color_dark: '#1a1a1a'
-  image_dark:  'assets/chef_logo1.png'
+  image_dark:  'assets/chef_splash.png'
   android: true
   ios: true
 # For information on the generic Dart part of this file, see the
