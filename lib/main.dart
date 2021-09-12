@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:hexcolor/hexcolor.dart';
-import 'views/countdown-page.dart';
+import 'views/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Chef app',
       theme: ThemeData(primarySwatch: Colors.deepOrange),
-      home: CountdownPage(),
+      home: MyHomePage(),
     );
   }
 }
