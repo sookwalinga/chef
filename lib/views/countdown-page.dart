@@ -63,94 +63,102 @@ class _CountdownPageState extends State<CountdownPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff5fbff),
-      body: Column(
-        children: [
-          Expanded(
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox(
-                  width: 250,
-                  height: 250,
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.grey.shade300,
-                    value: progress,
-                    strokeWidth: 24,
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/wp8.jpeg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  SizedBox(
+                    width: 250,
+                    height: 250,
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.grey.shade300,
+                      value: progress,
+                      strokeWidth: 24,
+                    ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    if (controller.isDismissed) {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) => Container(
-                          height: 250,
-                          child: CupertinoTimerPicker(
-                            initialTimerDuration: controller.duration!,
-                            onTimerDurationChanged: (time) {
-                              setState(() {
-                                controller.duration = time;
-                              });
-                            },
+                  GestureDetector(
+                    onTap: () {
+                      if (controller.isDismissed) {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => Container(
+                            height: 250,
+                            child: CupertinoTimerPicker(
+                              initialTimerDuration: controller.duration!,
+                              onTimerDurationChanged: (time) {
+                                setState(() {
+                                  controller.duration = time;
+                                });
+                              },
+                            ),
                           ),
+                        );
+                      }
+                    },
+                    child: AnimatedBuilder(
+                      animation: controller,
+                      builder: (context, child) => Text(
+                        countText,
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
                         ),
-                      );
-                    }
-                  },
-                  child: AnimatedBuilder(
-                    animation: controller,
-                    builder: (context, child) => Text(
-                      countText,
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    if (controller.isAnimating) {
-                      controller.stop();
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      if (controller.isAnimating) {
+                        controller.stop();
+                        setState(() {
+                          isPlaying = false;
+                        });
+                      } else {
+                        controller.reverse(
+                            from:
+                                controller.value == 0 ? 1.0 : controller.value);
+                        setState(() {
+                          isPlaying = true;
+                        });
+                      }
+                    },
+                    child: RoundButton(
+                      icon: isPlaying == true ? Icons.pause : Icons.play_arrow,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      controller.reset();
                       setState(() {
                         isPlaying = false;
                       });
-                    } else {
-                      controller.reverse(
-                          from: controller.value == 0 ? 1.0 : controller.value);
-                      setState(() {
-                        isPlaying = true;
-                      });
-                    }
-                  },
-                  child: RoundButton(
-                    icon: isPlaying == true ? Icons.pause : Icons.play_arrow,
+                    },
+                    child: RoundButton(
+                      icon: Icons.stop,
+                    ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    controller.reset();
-                    setState(() {
-                      isPlaying = false;
-                    });
-                  },
-                  child: RoundButton(
-                    icon: Icons.stop,
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
