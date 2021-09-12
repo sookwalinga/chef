@@ -3,6 +3,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:chef/custom_animated_bottom_bar.dart';
 import 'package:chef/views/countdown-page.dart';
 import 'package:chef/views/search_screen.dart';
+import 'package:chef/views/shopping.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -13,6 +14,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
 
   final _inactiveColor = Colors.grey;
+
+  get key => null;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,12 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Widget> pages = [
       CountdownPage(),
       SearchScreen(),
-      Container(
-        alignment: Alignment.center,
-        child: Text(
-          "Shopping List",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
+      ShoppingList(
+        title: 'Shopping List',
+        key: key,
       ),
       Container(
         alignment: Alignment.center,
